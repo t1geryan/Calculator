@@ -182,7 +182,7 @@
         android:theme="@style/NumberButton"
         app:layout_constraintHeight_percent="0.12"
         app:layout_constraintStart_toEndOf="@+id/btn_8"
-        app:layout_constraintTop_toBottomOf="@+id/brn_cBracket"
+        app:layout_constraintTop_toBottomOf="@+id/btn_cBracket"
         app:layout_constraintWidth_percent="0.245" />
 
     <TextView
@@ -208,7 +208,7 @@
         android:theme="@style/NumberButton"
         app:layout_constraintHeight_percent="0.12"
         app:layout_constraintStart_toEndOf="@+id/btn_7"
-        app:layout_constraintTop_toBottomOf="@+id/brn_oBracket"
+        app:layout_constraintTop_toBottomOf="@+id/btn_oBracket"
         app:layout_constraintWidth_percent="0.245" />
 
     <TextView
@@ -224,11 +224,11 @@
         app:layout_constraintWidth_percent="0.245" />
 
     <TextView
-        android:id="@+id/brn_oBracket"
+        android:id="@+id/btn_oBracket"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
-        android:text="@string/close_bracket"
+        android:text="@string/open_bracket"
         android:theme="@style/ActionButton"
         app:layout_constraintHeight_percent="0.12"
         app:layout_constraintStart_toEndOf="@+id/btn_AC"
@@ -236,15 +236,15 @@
         app:layout_constraintWidth_percent="0.245" />
 
     <TextView
-        android:id="@+id/brn_cBracket"
+        android:id="@+id/btn_cBracket"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="4dp"
-        android:text="@string/open_bracket"
+        android:text="@string/close_bracket"
         android:theme="@style/ActionButton"
         app:layout_constraintHeight_percent="0.12"
-        app:layout_constraintStart_toEndOf="@+id/brn_oBracket"
-        app:layout_constraintTop_toTopOf="@+id/brn_oBracket"
+        app:layout_constraintStart_toEndOf="@+id/btn_oBracket"
+        app:layout_constraintTop_toTopOf="@+id/btn_oBracket"
         app:layout_constraintWidth_percent="0.245" />
 
     <TextView
@@ -255,15 +255,15 @@
         android:text="@string/division"
         android:theme="@style/ActionButton"
         app:layout_constraintHeight_percent="0.12"
-        app:layout_constraintStart_toEndOf="@+id/brn_cBracket"
-        app:layout_constraintTop_toTopOf="@+id/brn_cBracket"
+        app:layout_constraintStart_toEndOf="@+id/btn_cBracket"
+        app:layout_constraintTop_toTopOf="@+id/btn_cBracket"
         app:layout_constraintWidth_percent="0.245" />
 
     <TextView
         android:id="@+id/output"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:ellipsize="start"
+        android:ellipsize="end"
         android:theme="@style/iostream"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.15"
@@ -275,7 +275,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:theme="@style/iostream"
-        android:ellipsize="end"
+        android:ellipsize="start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.15"
         app:layout_constraintStart_toStartOf="parent"

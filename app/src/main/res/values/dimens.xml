@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_margin">4dp</dimen>
+    <dimen name="button_width">0.245</dimen>
+    <dimen name="button_height">0.12</dimen>
+    <dimen name="iofield_height">0.15</dimen>
+    
+</resources>

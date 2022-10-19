@@ -1,9 +1,12 @@
 package com.example.calculator
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import com.example.calculator.databinding.ActivityMainBinding
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.lang.Exception
@@ -19,7 +22,11 @@ class MainActivity : AppCompatActivity() {
 
         // scale animation (look at res/anim/scale.xml)
         val scaleAnim = AnimationUtils.loadAnimation(this, R.anim.scale)
-
+        with(binding.output) {
+            setOnLongClickListener {
+                copyOutput()
+            }
+        }
         //Symbol Buttons List
         with(binding.btn0) {
             setOnClickListener {
@@ -168,7 +175,7 @@ class MainActivity : AppCompatActivity() {
     private fun setDot(str: String) {
         val lastInputNumber = binding.input.text.split('+', '-', '/', '*', '(', ')').last()
         if ('.' !in lastInputNumber && binding.input.text.last() !in "+-/*()")
-            setTextFields(str);
+            setTextFields(str)
     }
 
     private fun back() { // delete last symbol from input field and delete output field text at all
@@ -182,7 +189,7 @@ class MainActivity : AppCompatActivity() {
             // using library exp4j (take string get result)
             val ex = ExpressionBuilder(binding.input.text.toString()).build()
 
-            val fiveDigitPrecision = 100_000.0;
+            val fiveDigitPrecision = 100_000.0
             val result = (ex.evaluate() * fiveDigitPrecision).roundToLong() / fiveDigitPrecision
 
             //Output of integers without a dot, and double numbers with a dot
@@ -197,5 +204,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun copyOutput(): Boolean {
+        if (binding.output.text.isNotEmpty()) {
+            val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            val clip: ClipData = ClipData.newPlainText("Calc Result", binding.output.text)
+            clipboard.setPrimaryClip(clip)
+
+            Toast.makeText(applicationContext, "Result is copied", Toast.LENGTH_SHORT).show()
+        }
+        return true
+    }
 }
 

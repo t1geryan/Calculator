@@ -3,14 +3,14 @@
     <style name="ActionButton">
         <item name="android:background">@color/brick</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="NumberButton">
         <item name="android:background">@color/orange_yellow</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:gravity">center</item>
     </style>
 

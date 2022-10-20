@@ -2,15 +2,16 @@ package com.example.calculator
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.calculator.databinding.ActivityMainBinding
 import net.objecthunter.exp4j.ExpressionBuilder
-import java.lang.Exception
 import kotlin.math.roundToLong
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         // scale animation (look at res/anim/scale.xml)
         val scaleAnim = AnimationUtils.loadAnimation(this, R.anim.scale)
+
         with(binding.output) {
             setOnLongClickListener {
                 copyOutput()
@@ -188,16 +190,23 @@ class MainActivity : AppCompatActivity() {
         try {
             // using library exp4j (take string get result)
             val ex = ExpressionBuilder(binding.input.text.toString()).build()
-
-            val fiveDigitPrecision = 100_000.0
-            val result = (ex.evaluate() * fiveDigitPrecision).roundToLong() / fiveDigitPrecision
+            var result = ex.evaluate()
 
             //Output of integers without a dot, and double numbers with a dot
             val longRes = result.toLong()
-            if (result == longRes.toDouble())
-                binding.output.text = longRes.toString()
-            else
+            if (result == longRes.toDouble()) {
+                val strRes = longRes.toString()
+                if (strRes.length > 14)
+                    binding.output.text = "..."
+                else
+                    binding.output.text = strRes
+            }
+            else {
+                val fiveDigitPrecision = 100_000.0
+                result = (result * fiveDigitPrecision).roundToLong() / fiveDigitPrecision
                 binding.output.text = result.toString()
+            }
+
 
         } catch (e: Exception) { // if bad input
             Log.d("Error!", "message: ${e.message}")

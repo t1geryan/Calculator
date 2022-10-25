@@ -3,7 +3,6 @@ package com.example.calculator
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.Toast
@@ -15,11 +14,14 @@ import kotlin.math.roundToLong
 
 class MainActivity : AppCompatActivity() {
 
+    private var isCalculated: Boolean = false
+
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         // scale animation (look at res/anim/scale.xml)
         val scaleAnim = AnimationUtils.loadAnimation(this, R.anim.scale)
@@ -152,11 +154,18 @@ class MainActivity : AppCompatActivity() {
             setOnClickListener {
                 startAnimation(scaleAnim)
                 calculate()
+                isCalculated = true
+                binding.output.textSize = 48f
             }
         }
     }
 
     private fun setTextFields(str: String) {
+        if (isCalculated) {
+            isCalculated = false
+            binding.output.textSize = 40f
+            binding.input.text = binding.output.text
+        }
         binding.input.append(str)
     }
 
@@ -194,19 +203,13 @@ class MainActivity : AppCompatActivity() {
 
             //Output of integers without a dot, and double numbers with a dot
             val longRes = result.toLong()
-            if (result == longRes.toDouble()) {
-                val strRes = longRes.toString()
-                if (strRes.length > 14)
-                    binding.output.text = "..."
-                else
-                    binding.output.text = strRes
-            }
+            if (result == longRes.toDouble())
+                binding.output.text = longRes.toString()
             else {
                 val fiveDigitPrecision = 100_000.0
                 result = (result * fiveDigitPrecision).roundToLong() / fiveDigitPrecision
                 binding.output.text = result.toString()
             }
-
 
         } catch (e: Exception) { // if bad input
             Log.d("Error!", "message: ${e.message}")

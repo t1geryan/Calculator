@@ -275,7 +275,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:ellipsize="start"
-            android:theme="@style/iostream"/>
+            android:theme="@style/iostream"
+            android:textSize="32dp"/>
     </HorizontalScrollView>
 
 
